@@ -502,7 +502,6 @@ main()
     printf(" |    |   \\  |  /|  |   |  |   / __ \\|  |_(  <_> )\n");
     printf(" |______  /____/ |__|   |__|  (____  /____/\\____/ \n");
     printf("        \\/                         \\/              \n");
-    printf("By Moro Bamber\n");
     printf(">> ");
     //yylex();
     return yyparse();
