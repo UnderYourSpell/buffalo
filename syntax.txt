@@ -1,0 +1,6 @@
+a = 5+2 declare a variable
+3! factorial
+10 % 3 modulo
+while a = 3 do a = a+1; while a condition do something
+loop 3 do a = a+1; for loop, loop 3 times
+def avg(a,b) = (a+b)/2; define a function
