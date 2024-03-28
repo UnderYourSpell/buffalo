@@ -57,17 +57,18 @@ extern int yydebug;
     NUMBER = 258,                  /* NUMBER  */
     NAME = 259,                    /* NAME  */
     FUNC = 260,                    /* FUNC  */
-    STRING = 261,                  /* STRING  */
-    EOL = 262,                     /* EOL  */
-    IF = 263,                      /* IF  */
-    THEN = 264,                    /* THEN  */
-    ELSE = 265,                    /* ELSE  */
-    WHILE = 266,                   /* WHILE  */
-    DO = 267,                      /* DO  */
-    LET = 268,                     /* LET  */
-    LOOP = 269,                    /* LOOP  */
-    CMP = 270,                     /* CMP  */
-    UMINUS = 271                   /* UMINUS  */
+    FUNC2 = 261,                   /* FUNC2  */
+    STRING = 262,                  /* STRING  */
+    EOL = 263,                     /* EOL  */
+    IF = 264,                      /* IF  */
+    THEN = 265,                    /* THEN  */
+    ELSE = 266,                    /* ELSE  */
+    WHILE = 267,                   /* WHILE  */
+    DO = 268,                      /* DO  */
+    LET = 269,                     /* LET  */
+    LOOP = 270,                    /* LOOP  */
+    CMP = 271,                     /* CMP  */
+    UMINUS = 272                   /* UMINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -84,8 +85,9 @@ union YYSTYPE
     struct ast_string *g;
     struct symlist *sl;
     int fn; /*which function*/
+    int ft; /*which 2 arg function*/
 
-#line 89 "buf_parser.tab.h"
+#line 91 "buf_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

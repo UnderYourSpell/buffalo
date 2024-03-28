@@ -38,7 +38,7 @@ EXP ([Ee][-+]?[0-9]+)
 "else" { return ELSE; }
 "while" { return WHILE; }
 "do" { return DO; }
-"def" { return LET;}
+"yak" { return LET;}
 "loop" {return LOOP;}
 
 
@@ -53,6 +53,9 @@ EXP ([Ee][-+]?[0-9]+)
 "acos" { yylval.fn = B_acos; return FUNC; }
 "atan" { yylval.fn = B_atan; return FUNC; }
 "random" { yylval.fn = B_rand; return FUNC; }
+
+"pow" { yylval.ft = B_pow; return FUNC2; }
+"atan2" { yylval.ft = B_atan2; return FUNC2; }
 
 \"[^\"\\n]*["\\n] { printf("%s\n", yytext); }
 

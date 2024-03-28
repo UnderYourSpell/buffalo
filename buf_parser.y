@@ -12,11 +12,13 @@
     struct ast_string *g;
     struct symlist *sl;
     int fn; /*which function*/
+    int ft; /*which 2 arg function*/
 }
 /* declare tokens */
 %token <d> NUMBER
 %token <s> NAME
 %token <fn> FUNC
+%token <ft> FUNC2
 %token <g> STRING
 %token EOL
 %token IF THEN ELSE WHILE DO LET LOOP
@@ -64,6 +66,7 @@ exp: exp CMP exp { $$ = newcmp($2, $1, $3); }
     | NAME '=' exp { $$ = newasgn($1, $3); }
     | FUNC '(' explist ')' { $$ = newfunc($1, $3); }
     | NAME '(' explist ')' { $$ = newcall($1, $3); }
+    | FUNC2 '('exp','exp')'{ $$ = newfunc2($1, $3, $5);}
 ;
 
 string_expr: STRING {$$ = newstring($1);};
@@ -84,7 +87,7 @@ calclist: /* nothing */
     }
     | calclist LET NAME '(' symlist ')' '=' list EOL {
             dodef($3, $5, $8);
-            printf("Defined %s\n> ", $3->name); }
-    | calclist error EOL { yyerrok; printf("> "); }
+            printf("Defined %s\n-> ", $3->name); }
+    | calclist error EOL { yyerrok; printf(">> "); }
 ;
 %%

@@ -100,6 +100,20 @@ newfunc(int functype, struct ast *l)
     return (struct ast *)a;
 }
 
+struct ast *
+newfunc2(int functype, struct ast *l, struct ast *r){
+    struct fncall2 *a = malloc(sizeof(struct fncall2));
+    if(!a){
+        yyerror("out of space");
+        exit(0);
+    }
+    a->nodetype = 'T';
+    a->l = l;
+    a->r = r;
+    a->functype = functype;
+    return (struct ast *)a;
+}
+
 struct ast *newcall(struct symbol *s, struct ast *l) {
     struct ufncall *a = malloc(sizeof(struct ufncall));
     if (!a) {
@@ -185,6 +199,7 @@ void treefree(struct ast *a) {
         case 'M':
         case 'C':
         case 'F':
+        case 'T':
             treefree(a->l);
             /* no subtree */
         case 'K':
@@ -246,6 +261,7 @@ double factorial(double n){
 
 
 static double callbuiltin(struct fncall *);
+static double callbuiltin2(struct fncall2 *);
 static double calluser(struct ufncall *);
 
 double eval(struct ast *a) {
@@ -359,6 +375,9 @@ double eval(struct ast *a) {
         case 'F':
             v = callbuiltin((struct fncall *)a);
             break;
+        case 'T':
+            v = callbuiltin2((struct fncall2 *)a);
+            break;
         case 'C':
             v = calluser((struct ufncall *)a);
             break;
@@ -366,6 +385,24 @@ double eval(struct ast *a) {
             printf("internal error: bad node %c\n", a->nodetype);
     }
     return v;
+}
+
+static double
+callbuiltin2(struct fncall2 *f){
+    enum bifs functype = f->functype;
+    double a = eval(f->l);
+    double b = eval(f->r);
+    switch(functype){
+        case B_pow:
+            return pow(a,b);
+        case B_atan2:
+            return atan2(a,b);
+        return a;
+        default:
+        yyerror("Unknown built-in function %d", functype);
+        return 0.0;
+    }
+    
 }
 
 //BUILT IN FUNCTIONS

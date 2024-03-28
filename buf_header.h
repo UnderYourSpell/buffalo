@@ -17,8 +17,8 @@ struct symbol { /* a variable name */
 struct symbol *lookup(char*);
 /* list of symbols, for an argument list */
 struct symlist {
-struct symbol *sym;
-struct symlist *next;
+    struct symbol *sym;
+    struct symlist *next;
 };
 
 
@@ -51,6 +51,18 @@ enum bifs { /* built-in functions */
     B_atan,
     B_rand
 };
+
+enum bifs2 {
+    B_pow = 1,
+    B_atan2,
+};
+
+struct fncall2 {
+    int nodetype;
+    struct ast* l;
+    struct ast *r;
+    enum bifs2 functype;
+};
 /* nodes in the abstract syntax tree */
 /* all have common initial nodetype */
 struct ast {
@@ -61,7 +73,8 @@ struct ast {
 
 struct fncall { /* built-in function */
     int nodetype; /* type F */
-    struct ast *l;
+    struct ast *l; //exp or explist
+    //struct ast *r;
     enum bifs functype;
 };
 
@@ -102,6 +115,7 @@ struct symasgn {
 struct ast *newast(int nodetype, struct ast *l, struct ast *r);
 struct ast *newcmp(int cmptype, struct ast *l, struct ast *r);
 struct ast *newfunc(int functype, struct ast *l);
+struct ast *newfunc2(int functype, struct ast *l, struct ast *r);
 struct ast *newcall(struct symbol *s, struct ast *l);
 struct ast *newref(struct symbol *s);
 struct ast *newasgn(struct symbol *s, struct ast *v);
