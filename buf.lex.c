@@ -1011,7 +1011,7 @@ case 41:
 /* rule 41 can match eol */
 YY_RULE_SETUP
 #line 60 "buf_lexical_analyzer.l"
-{ printf("%s\n", yytext); }
+{ yylval.g = yytext; return STRING; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP

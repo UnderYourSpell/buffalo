@@ -9,7 +9,7 @@
     struct ast *a;
     double d;
     struct symbol *s; /*which symbol*/
-    struct ast_string *g;
+    char* g;
     struct symlist *sl;
     int fn; /*which function*/
     int ft; /*which 2 arg function*/
@@ -69,7 +69,7 @@ exp: exp CMP exp { $$ = newcmp($2, $1, $3); }
     | FUNC2 '('exp','exp')'{ $$ = newfunc2($1, $3, $5);}
 ;
 
-string_expr: STRING {$$ = newstring($1);};
+string_expr: STRING {$$ = $1;}
 
 
 explist: exp
@@ -82,12 +82,15 @@ symlist: NAME { $$ = newsymlist($1, NULL); }
 
 calclist: /* nothing */
     | calclist stmt EOL {
-    printf("= %4.4g\n>> ", eval($2));
-    treefree($2);
+        printf("= %4.4g\n>> ", eval($2));
+        treefree($2);
     }
     | calclist LET NAME '(' symlist ')' '=' list EOL {
             dodef($3, $5, $8);
             printf("Defined %s\n-> ", $3->name); }
+    | calclist string_expr EOL{
+        printf("String: %s", $2);
+    }
     | calclist error EOL { yyerrok; printf(">> "); }
 ;
 %%

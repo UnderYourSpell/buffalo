@@ -57,7 +57,7 @@ EXP ([Ee][-+]?[0-9]+)
 "pow" { yylval.ft = B_pow; return FUNC2; }
 "atan2" { yylval.ft = B_atan2; return FUNC2; }
 
-\"[^\"\\n]*["\\n] { printf("%s\n", yytext); }
+\"[^\"\\n]*["\\n] { yylval.g = yytext; return STRING; }
 
 
 [a-zA-Z][a-zA-Z0-9]* { yylval.s = lookup(yytext); return NAME; }

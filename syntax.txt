@@ -1,6 +1,9 @@
 a = 5+2 declare a variable
 3! factorial
 10 % 3 modulo
-while a = 3 do a = a+1; while a condition do something
+atan(a,b) arctan2
+pow(2,3) or 2^3 works
+while a = 3 do a = a+1;print(a); while a condition do something, takes a list of statements
 loop 3 do a = a+1; for loop, loop 3 times
-def avg(a,b) = (a+b)/2; define a function
+yak avg(a,b) = (a+b)/2; define a function with yak func(args) = do something  
+

@@ -82,7 +82,7 @@ union YYSTYPE
     struct ast *a;
     double d;
     struct symbol *s; /*which symbol*/
-    struct ast_string *g;
+    char* g;
     struct symlist *sl;
     int fn; /*which function*/
     int ft; /*which 2 arg function*/
