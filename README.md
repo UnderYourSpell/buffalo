@@ -9,3 +9,5 @@ To run you must have flex and bison installed
 make
 ./buffalo
 ```
+
+## Please Read attached Report for more information
